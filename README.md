@@ -85,3 +85,4 @@ Change in product or loaction name creates changes in their names in the history
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 # Shatabdi-Inventory-Manager
+# Shatabdi-Inventory-Manager
