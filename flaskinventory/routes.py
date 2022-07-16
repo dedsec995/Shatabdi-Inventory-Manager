@@ -31,7 +31,11 @@ def product():
         details = Product.query.all()
         prod = Product.query.filter_by(prod_id = p_id).first()
         prod.prod_name = eform.editname.data
-        prod.prod_qty= eform.editqty.data
+        if (prod.prod_tqty < eform.edittqty.data):
+            prod.prod_qty += eform.edittqty.data - prod.prod_tqty
+        else:
+            prod.prod_qty -= prod.prod_tqty - eform.edittqty.data
+        prod.prod_tqty= eform.edittqty.data
         Balance.query.filter_by(product=pname).update(dict(product=eform.editname.data))
         Movement.query.filter_by(pname=pname).update(dict(pname=eform.editname.data))
         try:
@@ -45,7 +49,7 @@ def product():
         return render_template('product.html',title = 'Products',details=details,eform=eform)
 
     elif form.validate_on_submit() :
-        product = Product(prod_name=form.prodname.data,prod_qty=form.prodqty.data)
+        product = Product(prod_name=form.prodname.data,prod_qty=form.prodqty.data,prod_tqty=form.prodqty.data)
         db.session.add(product)
         try:
             db.session.commit()
@@ -124,7 +128,6 @@ def move():
     #--------------------------------------------------------------
     #send to db
     if form.validate_on_submit() and request.method == 'POST' :
-
         timestamp = datetime.datetime.now()
         boolbeans = check(form.src.data,form.destination.data,form.mprodname.data,form.mprodqty.data)
         if boolbeans == False:
@@ -180,7 +183,7 @@ def check(frm,to,name,qty):
         if(a=='None'):#if not
             return 'no prod'
 
-        elif (bl.quantity - 100) > qty:
+        elif (bl.quantity) > qty:
            #if from qty is sufficiently large, check to  in Balance
             bal = Balance.query.filter_by(location=to,product=name).first()
             a = str(bal)

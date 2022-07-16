@@ -61,6 +61,7 @@
  <tr>
    <th>ID</th>
    <th>Product Name</th>
+   <th>Total Quantity</th>
    <th>Unallocated Quantity</th>
    <th></th>
    <th></th>
@@ -71,6 +72,7 @@
   <tr>
    <td>{{d.prod_id}}</td>
    <td>{{d.prod_name}}</td>
+   <td>{{d.prod_tqty}}</td>
    <td>{{d.prod_qty}}</td>
    <td>
        <button type="button" class="btn btn-edit" data-toggle="modal" data-target = "#edit{{d.prod_id}}" >
@@ -94,9 +96,10 @@
              {{ eform.csrf_token() }}
              {{eform.editname.label(class="form-control-label")}}<br>
              {{ eform.editname(class="form-control form-control-lg",placeholder=d.prod_name) }}
+            
+             {{eform.edittqty.label(class="form-control-label")}}<br>
+             {{eform.edittqty(class="form-control form-control-lg",placeholder=d.prod_tqty)}}
 
-             {{eform.editqty.label(class="form-control-label")}}<br>
-             {{eform.editqty(class="form-control form-control-lg",placeholder=d.prod_qty)}}
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
