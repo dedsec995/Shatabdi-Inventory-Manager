@@ -88,7 +88,7 @@ def loc():
         except IntegrityError :
             db.session.rollback()
             flash(f'This location already exists','danger')
-            return redirect('/Location')
+            return redfirect('/Location')
     elif form.validate_on_submit() :
         loc = Location(loc_name=form.locname.data)
         db.session.add(loc)
