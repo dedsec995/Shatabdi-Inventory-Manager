@@ -18,8 +18,10 @@
     <div class="col-8">    <h3 style="display: inline-block;margin:0;"> Manage product movement</h3></div>
 
     <div class="col-4"> 
-      <button id="Move_Prod" type="button" class="btn btn-add" data-toggle="modal" data-target="#exampleModal">
+      <button id="Move_Prod" type="button" style='margin-right:16px' class="btn btn-add" data-toggle="modal" data-target="#exampleModal">
       <span class="btn-icon-add"><i class="glyphicon glyphicon-plus"></i></span>Move Product</button>
+      <button id="Move_Prod" type="button" class="btn btn-add" data-toggle="modal" data-target="#exampleModal2">
+        <span class="btn-icon-add"><i class="glyphicon glyphicon-plus"></i></span>Depleted Product</button>    
     </div>
     <script>
       document.addEventListener('keydown', (e) => {
@@ -92,6 +94,52 @@
     </div>
   </div>
   <!--end of modal design-->
+
+
+  <!-- Modal code-->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label"
+    aria-hidden="true" style="margin-top:150px;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <h3 class="modal-title" id="exampleModal2Label">Depleted Product</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+            {{ deptform.csrf_token() }}
+
+            {{deptform.dprodname.label(class="form-control-label")}}<br>
+            <div id="prod">
+              {{deptform.dprodname(class="form-control form-control-lg")}}
+            </div>
+
+            <div id="from">
+              {{deptform.dsrc.label(class="form-control-label")}}<br>
+              {{deptform.dsrc(class="form-control form-control-lg")}}
+            </div>
+
+            {{deptform.dprodqty.label(class="form-control-label")}}<br>
+            <div class="qty">
+              {{deptform.dprodqty(class="form-control form-control-lg") }}
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <div class="move">
+            {{ deptform.deptsubmit(class="btn btn-primary") }}
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--end of modal design-->
+
   <div class="row col-12 user-detail-table">
     <div class="table-responsive">
   <table id ='table_id' class="table table-hover">

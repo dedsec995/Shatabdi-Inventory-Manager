@@ -7,6 +7,7 @@ from wtforms.validators import DataRequired,NumberRange
 class addproduct(FlaskForm):
     prodname = StringField('Product Name', validators=[DataRequired()])
     prodqty = IntegerField('Quantity', validators=[NumberRange(min=1, max=1000000),DataRequired()])
+    proddept = IntegerField('Depletes', validators=[NumberRange(min=1, max=2),DataRequired()])
     prodsubmit = SubmitField('Save Changes')
 
 class editproduct(FlaskForm):
@@ -32,3 +33,18 @@ class moveproduct(FlaskForm):
         'Destination')
     mprodqty = IntegerField('Quantity', validators=[NumberRange(min=1, max=1000000),DataRequired()])
     movesubmit = SubmitField('Move')
+
+class productdepletion(FlaskForm):
+    dprodname = SelectField(
+        'Product Name')
+    dsrc = SelectField(
+        'Source')
+    dprodqty = IntegerField('Quantity', validators=[NumberRange(min=1, max=1000000),DataRequired()])
+    deptsubmit = SubmitField('Done')
+
+class expensesform(FlaskForm):
+    eperson = StringField('Name', validators=[DataRequired()])
+    eplace = StringField('Place', validators=[DataRequired()])
+    ecost = IntegerField('Cost', validators=[NumberRange(min=1, max=1000000),DataRequired()])
+    equantity = IntegerField('Quantity')
+    esubmit = SubmitField('Record')
